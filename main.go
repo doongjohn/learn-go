@@ -119,11 +119,11 @@ func main() {
 		ch1 := make(chan string)
 		ch2 := make(chan string)
 
-		cleanUp := func() {
+        defer func() {
 			close(chDone)
 			close(ch1)
 			close(ch2)
-		}
+		}()
 
 		go func() {
 			wg.Wait()
@@ -146,16 +146,15 @@ func main() {
 			wg.Done()
 		}()
 
-		done := false
-		for !done {
+		loop := true
+		for loop {
 			select {
 			case msg := <-ch1:
 				fmt.Println(msg)
 			case msg := <-ch2:
 				fmt.Println(msg)
 			case <-chDone:
-				done = true
-				cleanUp()
+				loop = false
 			}
 		}
 	}
