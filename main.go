@@ -25,7 +25,38 @@ import (
 	"time"
 )
 
+type Position struct {
+    x float32
+    y float32
+}
+
+type GameObject struct {
+    Position
+    name string
+}
+
 func main() {
+    hello := 10
+    hello2, hello := 20, 30
+    fmt.Println(hello, hello2)
+
+    num1, err := errFunc1()
+    if err != nil {
+        fmt.Println("it's err")
+    }
+    num2, err := errFunc1()
+    if err != nil {
+        fmt.Println("it's err")
+    }
+    _ = num1
+    _ = num2
+
+    // struct embeding
+    obj := GameObject{}
+    fmt.Printf("obj.name = %s\n", obj.name)
+    fmt.Printf("obj.x = %f\n", obj.x)
+    fmt.Printf("obj.y = %f\n", obj.y)
+
 	// rune
 	{
 		for pos, rune := range "👍🏻안유찬" {
@@ -119,7 +150,7 @@ func main() {
 		ch1 := make(chan string)
 		ch2 := make(chan string)
 
-        defer func() {
+		defer func() {
 			close(chDone)
 			close(ch1)
 			close(ch2)
@@ -158,4 +189,12 @@ func main() {
 			}
 		}
 	}
+}
+
+func errFunc1() (int, error) {
+	return 100, nil
+}
+
+func errFunc2() (int, error) {
+	return 100, nil
 }
