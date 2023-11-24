@@ -20,42 +20,43 @@ package main
 // - learn context package
 
 import (
+	"errors"
 	"fmt"
 	"sync"
 	"time"
 )
 
 type Position struct {
-    x float32
-    y float32
+	x float32
+	y float32
 }
 
 type GameObject struct {
-    Position
-    name string
+	Position
+	name string
 }
 
 func main() {
-    hello := 10
-    hello2, hello := 20, 30
-    fmt.Println(hello, hello2)
+	hello := 10
+	hello2, hello := 20, 30
+	fmt.Println(hello, hello2)
 
-    num1, err := errFunc1()
-    if err != nil {
-        fmt.Println("it's err")
-    }
-    num2, err := errFunc1()
-    if err != nil {
-        fmt.Println("it's err")
-    }
-    _ = num1
-    _ = num2
+	num1, err := errFunc1()
+	if err != nil {
+		fmt.Printf("err: %s\n", err.Error())
+	}
+	num2, err := errFunc2()
+	if err != nil {
+		fmt.Printf("err: %s\n", err.Error())
+	}
+	_ = num1
+	_ = num2
 
-    // struct embeding
-    obj := GameObject{}
-    fmt.Printf("obj.name = %s\n", obj.name)
-    fmt.Printf("obj.x = %f\n", obj.x)
-    fmt.Printf("obj.y = %f\n", obj.y)
+	// struct embeding
+	obj := GameObject{name: "Phoo"}
+	fmt.Printf("obj.name = %s\n", obj.name)
+	fmt.Printf("obj.x = %f\n", obj.x)
+	fmt.Printf("obj.y = %f\n", obj.y)
 
 	// rune
 	{
@@ -196,5 +197,5 @@ func errFunc1() (int, error) {
 }
 
 func errFunc2() (int, error) {
-	return 100, nil
+	return 100, errors.New("wow this is some error")
 }
