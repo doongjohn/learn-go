@@ -20,8 +20,11 @@ package main
 // - learn context package
 
 import (
+	"bufio"
 	"errors"
 	"fmt"
+	"os"
+	"strings"
 	"sync"
 	"time"
 )
@@ -40,6 +43,14 @@ func main() {
 	hello := 10
 	hello2, hello := 20, 30
 	fmt.Println(hello, hello2)
+
+	input, readErr := bufio.NewReader(os.Stdin).ReadString('\n')
+	if readErr != nil {
+		fmt.Printf("err: %s\n", readErr)
+		return
+	}
+	input = strings.TrimRight(input, "\r\n")
+	fmt.Println(input)
 
 	num1, err := errFunc1()
 	if err != nil {
