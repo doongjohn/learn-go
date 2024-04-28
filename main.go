@@ -118,7 +118,7 @@ func main() {
 		}
 
 		wg.Wait()
-		fmt.Printf("took: %d\n", time.Since(start))
+		fmt.Printf("took: %f\n", time.Since(start).Seconds())
 	}
 
 	// channel
