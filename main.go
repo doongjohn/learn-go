@@ -71,7 +71,7 @@ func main() {
 
 	// rune
 	{
-		for pos, rune := range "👍🏻안유찬" {
+		for pos, rune := range "👍🏻안녕" {
 			fmt.Printf("rune %c starts at byte position %d\n", rune, pos)
 		}
 	}
